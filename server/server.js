@@ -13,15 +13,18 @@ var io = socketIO(server);
 io.on('connection',(socket) => {
     console.log('New user connected');
 
-    socket.emit('newMessage', {
-        from: 'karen',
-        text: 'hello Sevak',
-        createdAt: 456
-    });
+    // socket.emit('newMessage', {
+    //     from: 'karen',
+    //     text: 'hello Sevak',
+    //     createdAt: 456
+    // });
 
     socket.on('createMessage', function(message) {
-        // socket.emit('message', message);
-        console.log(message);
+        io.emit('newMessage', {
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getTime()
+        });
     });
 
     // socket.emit('newEmail', {
