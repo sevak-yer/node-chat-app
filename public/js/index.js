@@ -22,9 +22,9 @@ socket.on('disconnect', function () {
 //     text: 'the first email created',
 //     createdAt: 321
 // });
-socket.on('message', function(message) {
-    console.log(message);
-});
+// socket.on('message', function(message) {
+//     console.log(message);
+// });
 
 socket.on('newMessage', function(message) {
     console.log(message);
