@@ -32,7 +32,8 @@ io.on('connection',(socket) => {
     // }
     );
 
-    socket.on('createMessage', function(message) {
+    socket.on('createMessage', function(message, callback) {
+        console.log('createMessage', message);
         io.emit('newMessage', generateMessage(message.from, message.text)
         
         // {
@@ -41,6 +42,7 @@ io.on('connection',(socket) => {
         //     createdAt: new Date().getTime()
         // }
         );
+        callback('This is from the server.');
         // socket.broadcast.emit('newMessage', {
         //     from: message.from,
         //     text: message.text,

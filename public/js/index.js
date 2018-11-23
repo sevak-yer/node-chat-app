@@ -17,16 +17,33 @@ socket.on('disconnect', function () {
 //     console.log('New Email ', email);
 // });
 
-// socket.emit('createEmail', {
-//     From: 'client@gmail.com',
-//     text: 'the first email created',
-//     createdAt: 321
+// socket.emit('createMessage', {
+//     from: 'Sevak',
+//     text: 'Hi'
+// }, function (data) {
+//     console.log('Got it.' , data)
 // });
+
 // socket.on('message', function(message) {
 //     console.log(message);
 // });
 
 socket.on('newMessage', function(message) {
     console.log(message);
+    var li = jQuery('<li></li>');
+    li.text(`${message.from}: ${message.text}`);
+
+    jQuery('#messages').append(li);
+});
+
+jQuery('#message-form').on('submit', function(e) {
+    e.preventDefault();
+
+    socket.emit('createMessage', {
+        from: 'User',
+        text: jQuery('[name=message]').val()
+    },function (data) {
+        console.log('Got it.' , data)
+    });
 });
 
